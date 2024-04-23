@@ -8,6 +8,9 @@ import { Filter } from "@components/Filter";
 
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import { FlatList } from "react-native";
+import { PlayerCard } from "@components/PlayerCard";
+import { ListEmpty } from "@components/ListEmpty";
+import { Button } from "@components/Button";
 
 export function Players() {
   const [team, setTeam] = useState<string>("Time A");
@@ -43,6 +46,24 @@ export function Players() {
 
         <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
+
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <PlayerCard name={item} onRemove={() => {}} />
+        )}
+        ListEmptyComponent={() => (
+          <ListEmpty message="Não há pessoas nesse time." />
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[
+          { paddingBottom: 100 },
+          !players.length && { flex: 1 },
+        ]}
+      />
+
+      <Button title="Remover time" type="SECONDARY" />
     </Container>
   );
 }
