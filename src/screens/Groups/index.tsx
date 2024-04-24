@@ -9,10 +9,16 @@ import { GroupCard } from "@components/GroupCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
 
-
+import { useNavigation } from "@react-navigation/native";
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
+
+  const navigation = useNavigation();
+
+  function handleNewGroup() {
+    navigation.navigate("new");
+  }
 
   return (
     <Container>
@@ -23,14 +29,14 @@ export function Groups() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => (
-          <GroupCard title={item} onPress={() => {}} />
-        )}
+        renderItem={({ item }) => <GroupCard title={item} onPress={() => {}} />}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
-        ListEmptyComponent={() => <ListEmpty message="Que tal cadastrar a primeira turma?" />}
+        ListEmptyComponent={() => (
+          <ListEmpty message="Que tal cadastrar a primeira turma?" />
+        )}
       />
 
-      <Button title="Criar nova turma" onPress={() => {}} />
+      <Button title="Criar nova turma" onPress={handleNewGroup} />
     </Container>
   );
 }
