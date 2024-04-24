@@ -1,5 +1,4 @@
 import { ThemeProvider } from "styled-components";
-import { Groups } from "@screens/Groups";
 import theme from "./src/theme";
 
 import {
@@ -10,8 +9,8 @@ import {
 
 import { Loading } from "@components/Loading";
 import { StatusBar } from "react-native";
-import { NewGroup } from "@screens/NewGroup";
-import { Players } from "@screens/Players";
+
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,7 +26,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Players /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
